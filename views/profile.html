@@ -20,41 +20,35 @@
 			  <!-- Default panel contents -->
 			  <div class="panel-heading">Most Recent Rounds</div>
 			  <!-- Table -->
-			  <table class="table">
-				  <thead>
-				    <tr>
-			    		<th>Date</th>
-			    		<th>Course</th>
-			    		<th>Front 9</th>
-			    		<th>Back 9</th>
-			    		<th>Total</th>
-			    	</tr>
-			      </thead>
-			  </table>
+			  <table class="table" >
 		    	    <!-- Scores template placeholder -->
-		    	    <div id='scores-placeholder'></div>
-
+		    	    	<thead>
+				    		<tr>
+			    				<td>Date</td>
+			    				<td>Course</td>
+			    				<td>Front 9</td>
+			    				<td>Back 9</td>
+			    				<td>Total</td>
+			    			</tr>
+			      		</thead>
+			      		<tbody id='scores-placeholder'>
+			      		</tbody>
 		      </table>
 			</div>
 		</div>
-
     </body>
 </html>
 
 
 <!-- courses template -->
   <script type="text/template" id="scores-template">
- 	//<table>
- 	<tbody>
- 		<tr>
-      		<td> <%= date %> </td>
-     		<td> <%= course.name %> </td>
-  			<td> <%= game.score[0].hole1 %> </td>
-  			<td> <%= game.score[1].hole2 %> </td>
-  			<td> <%= game.score[2].hole3 %> </td>
- 		</tr>
- 	</tbody>
- 	//</table>
+ 			<tr>
+      			<td> <%= date %> </td>
+     			<td> <%= course.name %> </td>
+  				<td> <%= game.score[0].hole1 %> </td>
+  				<td> <%= game.score[1].hole2 %> </td>
+  				<td> <%= game.score[2].hole3 %> </td>
+ 			</tr>
   </script>
 
 
