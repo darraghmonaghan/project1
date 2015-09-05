@@ -30,10 +30,10 @@
 			    		<th>Total</th>
 			    	</tr>
 			      </thead>
-		      <tbody>
-		    	<!-- Scores template placeholder -->
-		    	<div id='scores-placeholder'></div>
-		      </tbody>
+			  </table>
+		    	    <!-- Scores template placeholder -->
+		    	    <div id='scores-placeholder'></div>
+
 		      </table>
 			</div>
 		</div>
@@ -44,6 +44,8 @@
 
 <!-- courses template -->
   <script type="text/template" id="scores-template">
+ 	//<table>
+ 	<tbody>
  		<tr>
       		<td> <%= date %> </td>
      		<td> <%= course.name %> </td>
@@ -51,6 +53,8 @@
   			<td> <%= game.score[1].hole2 %> </td>
   			<td> <%= game.score[2].hole3 %> </td>
  		</tr>
+ 	</tbody>
+ 	//</table>
   </script>
 
 
