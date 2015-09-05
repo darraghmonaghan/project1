@@ -1,0 +1,98 @@
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>My Profile</title>
+
+        <script src="/vendor/jquery/dist/jquery.min.js"></script>
+        <script src="/vendor/underscore/underscore-min.js"></script>
+        <script src="/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="/vendor/bootstrap/dist/css/bootstrap.min.css">
+        <script src="/static/javascripts/app.js"></script>
+
+    </head>
+    <body>
+
+    	<div class='container'>
+			<div class="panel panel-default">
+			  <!-- Default panel contents -->
+			  <div class="panel-heading">Most Recent Rounds</div>
+			  <!-- Table -->
+			  <table class="table">
+			    <tr>
+		    		<th>Date</th>
+		    		<th>Course</th>
+		    		<th>Front 9</th>
+		    		<th>Back 9</th>
+		    		<th>Total</th>
+		    	</tr>
+		    	<tr>
+		    		<td>DD/MM/YY</td>
+		    		<td>ABC National</td>
+		    		<td>45</td>
+		    		<td>45</td>
+		    		<td>90</td>
+		    	<tr>
+		    		<th>Date</th>
+		    		<th>Course</th>
+		    		<th>Front 9</th>
+		    		<th>Back 9</th>
+		    		<th>Total</th>
+		    	</tr>
+		    	<tr>
+		    		<td>DD/MM/YY</td>
+		    		<td>ABC National</td>
+		    		<td>45</td>
+		    		<td>45</td>
+		    		<td>90</td>
+		    	</tr>
+			  </table>
+			</div>
+		</div>
+
+
+    </body>
+</html>
+
+  <!-- octocat template placeholder -->
+  <div id="octocats-placeholder"></div>
+
+  <!-- octocat template -->
+  <script type="text/template" id="octocat-template">
+    <div class="octocat">
+      <p>
+        <%= lastName %>, <%= firstName %> 
+      </p>
+    </div>
+  </script>
+
+
+
+
+<!--             <div id="booksCon">
+                <script type="text/template" id="bookTemp">
+                    <div class="book">
+                        <hr>
+                        <h3><%= title %></h3>
+                        <p>Author: <%= author %></p>
+                        <p><em><%= description %></em></p>
+                        <p><strong>
+                            Comments:  <% _.each(comments, function(item)
+                            { %>
+                                <p>"<%= item.comment %>" - <%= item.person %></p>
+                            <% }); %>
+                        </strong></p>
+                        <form>
+                            <input type="text" name="comment" placeholder='Add Comment' class='comment'><br>
+                            <input type="text" name="username" placeholder='Username' class='username'><br>
+                        <input type="button" value="Submit" onclick='submit()'>
+                        </form>
+                    </div>
+                </script>
+            </div> -->
+
+
+
+
