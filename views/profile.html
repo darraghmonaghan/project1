@@ -15,32 +15,55 @@
     </head>
     <body>
 
-    	<div class='container'>
-			<div class="panel panel-default">
-			  <!-- Default panel contents -->
-			  <div class="panel-heading">Most Recent Rounds</div>
-			  <!-- Table -->
-			  <table class="table" >
-		    	    <!-- Scores template placeholder -->
-		    	    	<thead>
-				    		<tr>
-			    				<td>Date</td>
-			    				<td>Course</td>
-			    				<td>Front 9</td>
-			    				<td>Back 9</td>
-			    				<td>Total</td>
-			    			</tr>
-			      		</thead>
-			      		<tbody id='scores-placeholder'>
-			      		</tbody>
-		      </table>
-			</div>
+	    <div class='container'>
+
+			<nav class="navbar navbar-default">
+			  <div class="container-fluid">
+			    <!-- Brand and toggle get grouped for better mobile display -->
+			    <!-- Collect the nav links, forms, and other content for toggling -->
+				   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				      <ul class="nav navbar-nav">
+				        <li>Your Name Here</li>
+				        </li>
+				      </ul>
+				      <ul class="nav navbar-nav navbar-right">
+				        <li class="dropdown">
+				          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+				          <ul class="dropdown-menu">
+				            <li><a href="#">Submit New Score</a></li>
+				            <li role="separator" class="divider"></li>
+				            <li><a href="#">Logout</a></li>
+				          </ul>
+				        </li>
+				      </ul>
+				    </div><!-- /.navbar-collapse -->
+				  </div><!-- /.container-fluid -->
+			</nav>
+
+
+				<!-- Recent ScoresTable -->
+				<div class="panel panel-default">
+					<div class="panel-heading">Your Most Recent Scores</div>
+						<table class="table" >
+							<thead>
+								<tr>
+								    <td>Date</td>
+								    <td>Course</td>
+								    <td>Front 9</td>
+								    <td>Back 9</td>
+								    <td>Total</td>
+								</tr>
+							</thead>
+							<tbody id='scores-placeholder'></tbody>
+						</table>
+				</div>
+
 		</div>
     </body>
 </html>
 
 
-<!-- courses template -->
+<!-- Recent Scores Template -->
   <script type="text/template" id="scores-template">
  			<tr>
       			<td> <%= date %> </td>
@@ -50,8 +73,6 @@
   				<td> <%= score[2].hole3 %> </td>
  			</tr>
   </script>
-
-
 
 
 
