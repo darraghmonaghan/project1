@@ -68,8 +68,7 @@ var user = {
 	games: [game1, game2]
 };
 
-// ROUTES //
-
+// PROFILE PAGE //
 
 app.get('/profile', function (req, res) {
 	var user = user;
@@ -78,14 +77,47 @@ app.get('/profile', function (req, res) {
 })
 
 
-app.get('/api/user', function (req, res) {			// Sending JSON formatted User data to Client side (app.js) //
-	res.json(user);
-})
-
+// SUBMITTING NEW SCORES //
 
 app.get('/newscore', function (req, res) {
 	var newScore = path.join(views, "newscore.html");
 	res.sendFile(newScore);
+})
+
+app.post('/newscore', function (req, res) {
+	var newscore = req.body.games
+	console.log(newscore);
+	res.send('OK');
+
+})
+
+
+
+
+// app.post("/foods", function (req, res){
+//   var newFood = req.body;
+//   // add a unique id
+//   newFood.id = foods[foods.length - 1].id + 1;
+//   // add new food to DB (array, really...)
+//   foods.push(newFood);
+//   // send a response with newly created object
+//   res.send(newFood);
+// });
+
+
+
+
+
+
+
+
+
+
+
+// USER DATA //
+
+app.get('/api/user', function (req, res) {			// Sending JSON formatted User data to Client side (app.js) //
+	res.json(user);
 })
 
 

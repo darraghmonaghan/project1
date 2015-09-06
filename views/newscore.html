@@ -9,7 +9,7 @@
         <script src="/vendor/underscore/underscore-min.js"></script>
         <script src="/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="/vendor/bootstrap/dist/css/bootstrap.min.css">
-        <script src="/static/javascript/app.js"></script>
+        <script src="/static/javascript/newscore.js"></script>
 
     </head>
     <body>
@@ -42,103 +42,63 @@
 
 					<div class="container">
 				    <!--Row with three equal columns-->
+
+
+				    <form method='post' action='/newscore' id="new-score">
 					    <div class="row">
 					        <div class="col-md-4">
 					        	<table>
 								<thead>
 									<tr>
-									    <td></td>
 									    <td>Front 9</td>
+									    <td>Back 9</td>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-									    <td>1</td>
-									    <td><input type="text" class="form-control" placeholder="Enter your score for the 1st hole" aria-describedby="sizing-addon2"></td>
+									<tr>	
+									    <td><input type="text" name='games[hole1]' class="form-control" placeholder="Score for the 1st hole" aria-describedby="sizing-addon2"></td>
+									    <td><input type="text" name='games[hole10]' class="form-control" placeholder="Score for the 10th hole" aria-describedby="sizing-addon2"></td>
 									</tr>
 									<tr>
-									    <td>2</td>
-									    <td><input type="text" class="form-control" placeholder="Enter your score for the 2nd hole" aria-describedby="sizing-addon2"></td>
+									    <td><input type="text" name='games[hole2]' class="form-control" placeholder="Score for the 2nd hole" aria-describedby="sizing-addon2"></td>
+									    <td><input type="text" name='games[hole11]' class="form-control" placeholder="Score for the 11th hole" aria-describedby="sizing-addon2"></td>
 									</tr>
 									<tr>
-									    <td>3</td>
-									    <td><input type="text" class="form-control" placeholder="Enter your score for the 3rd hole" aria-describedby="sizing-addon2"></td>
+									    <td><input type="text" name='games[hole3]' class="form-control" placeholder="Score for the 3rd hole" aria-describedby="sizing-addon2"></td>
+									    <td><input type="text" name='games[hole12]' class="form-control" placeholder="Score for the 12th hole" aria-describedby="sizing-addon2"></td>
 									</tr>
 									<tr>
-									    <td>4</td>
-									    <td><input type="text" class="form-control" placeholder="Enter your score for the 4th hole" aria-describedby="sizing-addon2"></td>
+									    <td><input type="text" name='games[hole4]' class="form-control" placeholder="Score for the 4th hole" aria-describedby="sizing-addon2"></td>
+									    <td><input type="text" name='games[hole13]' class="form-control" placeholder="Score for the 13th hole" aria-describedby="sizing-addon2"></td>
 									</tr>
 									<tr>
-									    <td>5</td>
-									    <td><input type="text" class="form-control" placeholder="Enter your score for the 5th hole" aria-describedby="sizing-addon2"></td>
+									    <td><input type="text" name='games[hole5]' class="form-control" placeholder="Score for the 5th hole" aria-describedby="sizing-addon2"></td>
+									    <td><input type="text" name='games[hole14]' class="form-control" placeholder="Score for the 14th hole" aria-describedby="sizing-addon2"></td>
 									</tr>
 									<tr>
-									    <td>6</td>
-									    <td><input type="text" class="form-control" placeholder="Enter your score for the 6th hole" aria-describedby="sizing-addon2"></td>
+									    <td><input type="text" name='games[hole6]' class="form-control" placeholder="Score for the 6th hole" aria-describedby="sizing-addon2"></td>
+									    <td><input type="text" name='games[hole15]' class="form-control" placeholder="Score for the 15th hole" aria-describedby="sizing-addon2"></td>
 									</tr>
 									<tr>
-									    <td>7</td>
-									    <td><input type="text" class="form-control" placeholder="Enter your score for the 7th hole" aria-describedby="sizing-addon2"></td>
+									    <td><input type="text" name='games[hole7]' class="form-control" placeholder="Score for the 7th hole" aria-describedby="sizing-addon2"></td>
+									    <td><input type="text" name='games[hole16]' class="form-control" placeholder="Score for the 16th hole" aria-describedby="sizing-addon2"></td>
 									</tr>
 									<tr>
-									    <td>8</td>
-									    <td><input type="text" class="form-control" placeholder="Enter your score for the 8th hole" aria-describedby="sizing-addon2"></td>
+									    <td><input type="text" name='games[hole8]' class="form-control" placeholder="Score for the 8th hole" aria-describedby="sizing-addon2"></td>
+									    <td><input type="text" name='games[hole17]' class="form-control" placeholder="Score for the 17th hole" aria-describedby="sizing-addon2"></td>
 									</tr>
 									<tr>
-									    <td>9</td>
-									    <td><input type="text" class="form-control" placeholder="Enter your score for the 9th hole" aria-describedby="sizing-addon2"></td>
+									    <td><input type="text" name='games[hole9]' class="form-control" placeholder="Score for the 9th hole" aria-describedby="sizing-addon2"></td>
+									    <td><input type="text" name='games[hole18]' class="form-control" placeholder="Score for the 18th hole" aria-describedby="sizing-addon2"></td>
 									</tr>
 								</tbody>
 								</table> 
+								<button class="btn btn-default">Submit Score</button>
 					        </div>
-				        <div class="col-md-4">
-				        	<table>
-							<thead>
-								<tr>
-								    <td></td>
-								    <td>Back 9</td>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-								    <td>10</td>
-								    <td><input type="text" class="form-control" placeholder="Enter your score for the 10th hole" aria-describedby="sizing-addon2"></td>
-								</tr>
-								<tr>
-								    <td>11</td>
-								    <td><input type="text" class="form-control" placeholder="Enter your score for the 11th hole" aria-describedby="sizing-addon2"></td>
-								</tr>
-								<tr>
-								    <td>12</td>
-								    <td><input type="text" class="form-control" placeholder="Enter your score for the 12th hole" aria-describedby="sizing-addon2"></td>
-								</tr>
-								<tr>
-								    <td>13</td>
-								    <td><input type="text" class="form-control" placeholder="Enter your score for the 13th hole" aria-describedby="sizing-addon2"></td>
-								</tr>
-								<tr>
-								    <td>14</td>
-								    <td><input type="text" class="form-control" placeholder="Enter your score for the 14th hole" aria-describedby="sizing-addon2"></td>
-								</tr>
-								<tr>
-								    <td>15</td>
-								    <td><input type="text" class="form-control" placeholder="Enter your score for the 15th hole" aria-describedby="sizing-addon2"></td>
-								</tr>
-								<tr>
-								    <td>16</td>
-								    <td><input type="text" class="form-control" placeholder="Enter your score for the 16th hole" aria-describedby="sizing-addon2"></td>
-								</tr>
-								<tr>
-								    <td>17</td>
-								    <td><input type="text" class="form-control" placeholder="Enter your score for the 17th hole" aria-describedby="sizing-addon2"></td>
-								</tr>
-								<tr>
-								    <td>18</td>
-								    <td><input type="text" class="form-control" placeholder="Enter your score for the 18th hole" aria-describedby="sizing-addon2"></td>
-								</tr>
-							</tbody>
-							</table>
 				        </div>
+				    </form>
+
+
 				    </div>
 		</div>
     </body>

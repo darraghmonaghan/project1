@@ -24,6 +24,10 @@ function scoreTemplating(user) {
       });
 }
 
+
+// ON PAGE READY, EXECUTE //
+
+
 $(function() {
     
   getUserData()
