@@ -4,8 +4,8 @@ var Schema = mongoose.Schema;
 
 
 var games = new Schema ({
-	date: String,
-	course: {name: String, lattitude: Number, longitude: Number},
+	date: Date,
+	course: String, 
 	score: [{hole1: Number},
 		 	{hole2: Number},
 		 	{hole3: Number},

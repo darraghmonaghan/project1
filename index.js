@@ -85,7 +85,7 @@ app.get('/newscore', function (req, res) {
 })
 
 app.post('/newscore', function (req, res) {
-	var newscore = req.body.games
+	var newscore = req.body
 	console.log(newscore);
 	res.send('OK');
 
