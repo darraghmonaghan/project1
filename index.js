@@ -1,15 +1,14 @@
 
 var express = require("express"),
+	app = express(),
     bodyParser = require("body-parser"),
     path = require("path"),
     db = require("./models");
     mongoose = require('mongoose');
-
-var app = express(),
     views = path.join(__dirname, "views");
 
-app.use(bodyParser.urlencoded({extended: true}));
 
+app.use(bodyParser.urlencoded({extended: true}));
 app.use("/static", express.static("public"));
 app.use("/vendor", express.static("bower_components"));
 
@@ -71,14 +70,22 @@ var user = {
 
 
 app.get('/profile', function (req, res) {
+	var user = user;
 	var profilePath = path.join(views, "profile.html");
 	res.sendFile(profilePath);
 })
 
 
-app.get('/user', function (req, res) {
-	res.send(user);
+app.get('/api/user', function (req, res) {			// Sending JSON formatted User data to Client side (app.js) //
+	res.json(user);
 })
+
+
+app.get('/newscore', function (req, res) {
+	var newScore = path.join(views, "newscore.html");
+	res.sendFile(newScore);
+})
+
 
 app.listen(3000, function() {
     console.log("Server is now listening on localhost:3000");
