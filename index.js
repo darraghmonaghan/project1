@@ -68,6 +68,8 @@ var user = {
 	games: [game1, game2]
 };
 
+// ROUTES //
+
 
 app.get('/profile', function (req, res) {
 	var user = user;

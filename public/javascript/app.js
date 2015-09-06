@@ -1,3 +1,12 @@
+function getUserData() { 
+   var user;
+   $.get('/api/user', function(data) {
+      console.log(data);
+      user = data;
+        welcomeUser(user);
+        scoreTemplating(user);
+  })
+}
 
 function welcomeUser(user) {
   console.log(user + '1')
@@ -17,14 +26,7 @@ function scoreTemplating(user) {
 
 $(function() {
     
-    var user;
-
-   $.get('/api/user', function(data) {
-      console.log(data);
-      user = data;
-        welcomeUser(user);
-        scoreTemplating(user);
-  })
+  getUserData()
 
 });
 
