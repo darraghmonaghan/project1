@@ -1,6 +1,6 @@
 
 var mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/project1");   // NOT SURE OF CONNECTION TO MONGO DB, /project1   ????  //
+mongoose.connect("mongodb://localhost/");
 
-module.exports.Game = require("./games");
-module.exports.Game = require("./user");
+module.exports.Games = require("./games");
+module.exports.User = require("./user");

@@ -27,17 +27,6 @@ var games = new Schema ({
 });
 
 
-var user = new Schema ({
-	firstname: String,
-	surname: String,
-	email: String,
-	password: String,
-	gamesList: [games]
-});
-
-
-var User = mongoose.model("User", user);
 var Game = mongoose.model("Games", games);
 
 module.exports = Game;
-module.exports = User;
