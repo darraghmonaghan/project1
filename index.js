@@ -68,12 +68,38 @@ app.use("/vendor", express.static("bower_components"));
 // 	games: [game1, game2]
 // };
 
+
+
+// LOGIN PAGE //
+
+app.get('/home', function (req, res) {
+	var homePath = path.join(views, "home.html");
+	res.sendFile(homePath);
+})
+
+
+// app.post('/home', function (req, res) {
+// 	var email = req.body.email;
+// 	var password = req.body.password;
+// 	console.log(email);
+// 	console.log(password);
+// 	res.redirect('/profile');
+// })
+
+
+
 // PROFILE PAGE //
 
 app.get('/profile', function (req, res) {
 	var user = user;
 	var profilePath = path.join(views, "profile.html");
 	res.sendFile(profilePath);
+})
+
+app.post('/profile', function (req, res) {
+	var details = req.body
+	console.log(details);
+	res.redirect('/profile');
 })
 
 
