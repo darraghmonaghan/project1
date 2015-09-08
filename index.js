@@ -70,18 +70,18 @@ app.post("/signup", function signup(req, res) {
 
 // HOME & LOGIN PAGE //
 
-app.get('/home', function (req, res) {
-	var homePath = path.join(views, "home.html");
+app.get('/login', function (req, res) {
+	var homePath = path.join(views, "login.html");
 	res.sendFile(homePath);
 })
 
 
-app.post("/home", function login(req, res) {
+app.post("/login", function login(req, res) {
 	var user = req.body;
 	var username = user.email;
 	var password = user.password;
 	db.User.authenticate(username, password, function (err, user) {
-		res.send(user + " is logged in\n");
+		res.redirect('/profile');
 	});
 });
 
@@ -121,14 +121,17 @@ app.get('/newscore', function (req, res) {
 })
 
 app.post('/newscore', function (req, res) {
-	// var newscore = req.body;
-	// console.log(newscore);	
+	var submission = req.body;
+	var dateObj = new Date(submission.date);
+	submission.date = dateObj;
+	console.log(submission);
+	console.log(typeof(submission.date));
 	// //user.gamesList.push(newscore)
-	// db.Games.insert({newscore}, function (err, newscore) {
-	//     if (err) { return console.log(err); };
-	//     console.log(newscore + 'successfully input');
-	// });
-	// res.redirect('/profile');
+	db.Game.create(submission, function (err, newscore) {
+	    if (err) { return console.log(err); };
+	    console.log(newscore + 'successfully input');
+	    res.redirect('/profile');
+	});
 })
 
 
