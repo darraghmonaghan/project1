@@ -86,12 +86,6 @@ app.post("/login", function login(req, res) {
 });
 
 
-// app.post(['/home', '/signup'] function (req, res) {
-// 	var details = req.body
-// 	console.log(details);
-// 	res.send('Details Received');
-// })
-
 
 
 
@@ -105,12 +99,6 @@ app.get('/profile', function (req, res) {
 	var profilePath = path.join(views, "profile.html");
 	res.sendFile(profilePath);
 })
-
-// app.post('/profile', function (req, res) {
-// 	var details = req.body
-// 	console.log(details);
-// 	res.redirect('/profile');
-// })
 
 
 // SUBMITTING NEW SCORES //
@@ -137,11 +125,6 @@ app.post('/newscore', function (req, res) {
 
 
 // USER DATA //
-
-// app.get('/api/user', function (req, res) {			// Sending JSON formatted User data to Client side (app.js) //
-// 	res.json(user);
-// })
-
 
 app.listen(3000, function() {
     console.log("Server is now listening on localhost:3000");
