@@ -6,6 +6,7 @@ var express = require("express"),
     db = require("./models");
     mongoose = require('mongoose');
     views = path.join(__dirname, "views");
+    session = require("express-session"),
 
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -69,8 +70,39 @@ app.use("/vendor", express.static("bower_components"));
 // };
 
 
+app.use(
+  session({
+    secret: 'super-secret-private-keyyy',
+    resave: false,
+    saveUninitialized: true
+  })
+);
 
-// LOGIN PAGE //
+app.use(function (req, res, next) {
+  // login a user
+  req.login = function (user) {
+    req.session.userId = user._id;
+  };
+  // find the current user
+  req.currentUser = function (cb) {
+    db.User.
+      findOne({ _id: req.session.userId },
+      function (err, user) {
+        req.user = user;
+        cb(null, user);
+      })
+  };
+  // logout the current user
+  req.logout = function () {
+    req.session.userId = null;
+    req.user = null;
+  }
+  // call the next middleware in the stack
+  next(); 
+});
+
+
+// HOME & LOGIN PAGE //
 
 app.get('/home', function (req, res) {
 	var homePath = path.join(views, "home.html");
@@ -78,13 +110,45 @@ app.get('/home', function (req, res) {
 })
 
 
-// app.post('/home', function (req, res) {
-// 	var email = req.body.email;
-// 	var password = req.body.password;
-// 	console.log(email);
-// 	console.log(password);
-// 	res.redirect('/profile');
+app.post("/home", function login(req, res) {
+	var info = req.body;
+	console.log(info);
+	var email = info.email;
+	var password = info.password;
+	db.User.authenticate(email, password, function (err, user) {
+		req.login(info);
+		res.redirect('/profile');
+		//res.send(user + " is logged in\n");
+	});
+});
+
+
+// app.post(['/home', '/signup'] function (req, res) {
+// 	var details = req.body
+// 	console.log(details);
+// 	res.send('Details Received');
 // })
+
+
+// SIGN UP PAGE //
+
+app.get('/signup', function (req, res) {
+	var signUpPath = path.join(views, 'signup.html');
+	res.sendFile(signUpPath);
+});
+
+
+app.post("/signup", function signup(req, res) {
+  var info = req.body;
+  var firstname = info.firstname;
+  var surname = info.surname;
+  var email = info.email;
+  var password = info.password;
+  db.User.createSecure(firstname, surname, email, password, function() {
+    res.send(email + " is registered!\n");
+  });
+});
+
 
 
 
@@ -96,11 +160,11 @@ app.get('/profile', function (req, res) {
 	res.sendFile(profilePath);
 })
 
-app.post('/profile', function (req, res) {
-	var details = req.body
-	console.log(details);
-	res.redirect('/profile');
-})
+// app.post('/profile', function (req, res) {
+// 	var details = req.body
+// 	console.log(details);
+// 	res.redirect('/profile');
+// })
 
 
 // SUBMITTING NEW SCORES //
@@ -111,44 +175,26 @@ app.get('/newscore', function (req, res) {
 })
 
 app.post('/newscore', function (req, res) {
-	var newscore = req.body
-	console.log(newscore);
-	res.redirect('/profile');
+	// var newscore = req.body;
+	// console.log(newscore);	
+	// //user.gamesList.push(newscore)
+	// db.Games.insert({newscore}, function (err, newscore) {
+	//     if (err) { return console.log(err); };
+	//     console.log(newscore + 'successfully input');
+	// });
+	// res.redirect('/profile');
 })
-
-
-
-
-
-
-// app.post("/foods", function (req, res){
-//   var newFood = req.body;
-//   // add a unique id
-//   newFood.id = foods[foods.length - 1].id + 1;
-//   // add new food to DB (array, really...)
-//   foods.push(newFood);
-//   // send a response with newly created object
-//   res.send(newFood);
-// });
-
-
-
-
-
-
-
-
 
 
 
 // USER DATA //
 
-app.get('/api/user', function (req, res) {			// Sending JSON formatted User data to Client side (app.js) //
-	res.json(user);
-})
+// app.get('/api/user', function (req, res) {			// Sending JSON formatted User data to Client side (app.js) //
+// 	res.json(user);
+// })
 
 
 app.listen(3000, function() {
     console.log("Server is now listening on localhost:3000");
-})
+});
 
