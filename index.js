@@ -14,69 +14,13 @@ app.use("/static", express.static("public"));
 app.use("/vendor", express.static("bower_components"));
 
 
-
-// var game1 = {
-// 	date: '22/04/2014',
-// 	course: {name: 'Sentosa', lattitude: 1.243800, longitude: 103.829913},
-// 	score: [{hole1: 4},
-// 		 	{hole2: 4},
-// 		 	{hole3: 5},
-// 		 	{hole4: 2},
-// 		 	{hole5: 4},
-// 		 	{hole6: 4},
-// 		 	{hole7: 6},
-// 		 	{hole8: 4},
-// 		 	{hole9: 5},
-// 		 	{hole10: 2},
-// 		 	{hole11: 5},
-// 		 	{hole12: 6},
-// 		 	{hole13: 4},
-// 		 	{hole14: 4},
-// 		 	{hole15: 5},
-// 		 	{hole16: 6},
-// 		 	{hole17: 3},
-// 		 	{hole18: 5}]
-// };
-
-// var game2 = {
-//   date: '01/06/2014',
-//   course: {name: 'Belvoir', lattitude: 1.243800, longitude: 103.829913},
-//   score: [{hole1: 4},
-//           {hole2: 4},
-//           {hole3: 5},
-//           {hole4: 2},
-//           {hole5: 4},
-//           {hole6: 4},
-//           {hole7: 6},
-//           {hole8: 4},
-//           {hole9: 5},
-//           {hole10: 2},
-//           {hole11: 5},
-//           {hole12: 6},
-//           {hole13: 4},
-//           {hole14: 4},
-//           {hole15: 5},
-//           {hole16: 6},
-//           {hole17: 3},
-//           {hole18: 5}]
-// };
-
-// var user = {
-// 	firstname: 'Darragh',
-// 	surname: 'Monaghan',
-// 	email: 'monaghan.darragh@gmail.com',
-// 	password: '123',
-// 	games: [game1, game2]
-// };
-
-
-app.use(
-  session({
-    secret: 'super-secret-private-keyyy',
-    resave: false,
-    saveUninitialized: true
-  })
-);
+// app.use(
+//   session({
+//     secret: 'super-secret-private-keyyy',
+//     resave: false,
+//     saveUninitialized: true
+//   })
+// );
 
 app.use(function (req, res, next) {
   // login a user
@@ -102,6 +46,28 @@ app.use(function (req, res, next) {
 });
 
 
+// SIGN UP PAGE //
+
+app.get('/signup', function (req, res) {
+	var signUpPath = path.join(views, 'signup.html');
+	res.sendFile(signUpPath);
+});
+
+
+app.post("/signup", function signup(req, res) {
+  var user = req.body;
+  var firstname = user.firstname;
+  var surname = user.surname;
+  var email = user.email;
+  var password = user.password;
+  db.User.createSecure(firstname, surname, email, password, function() {
+    res.send(email + " is registered!\n");
+  });
+});
+
+
+
+
 // HOME & LOGIN PAGE //
 
 app.get('/home', function (req, res) {
@@ -111,14 +77,11 @@ app.get('/home', function (req, res) {
 
 
 app.post("/home", function login(req, res) {
-	var info = req.body;
-	console.log(info);
-	var email = info.email;
-	var password = info.password;
-	db.User.authenticate(email, password, function (err, user) {
-		req.login(info);
-		res.redirect('/profile');
-		//res.send(user + " is logged in\n");
+	var user = req.body;
+	var username = user.email;
+	var password = user.password;
+	db.User.authenticate(username, password, function (err, user) {
+		res.send(user + " is logged in\n");
 	});
 });
 
@@ -130,24 +93,7 @@ app.post("/home", function login(req, res) {
 // })
 
 
-// SIGN UP PAGE //
 
-app.get('/signup', function (req, res) {
-	var signUpPath = path.join(views, 'signup.html');
-	res.sendFile(signUpPath);
-});
-
-
-app.post("/signup", function signup(req, res) {
-  var info = req.body;
-  var firstname = info.firstname;
-  var surname = info.surname;
-  var email = info.email;
-  var password = info.password;
-  db.User.createSecure(firstname, surname, email, password, function() {
-    res.send(email + " is registered!\n");
-  });
-});
 
 
 

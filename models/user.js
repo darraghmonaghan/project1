@@ -1,5 +1,4 @@
 
-
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt');
@@ -12,6 +11,7 @@ var user = new Schema ({
 	passwordDigest: String,
 	gamesList: []
 });
+
 
 
 // create a new user with secure (hashed) password (for sign up)
