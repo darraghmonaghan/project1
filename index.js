@@ -75,7 +75,7 @@ app.post(['/users', "/signup"], function signup(req, res) {
 
 app.get('/user.json', function (req,res) {
 	req.currentUser(function (err, user) {
-		console.log(user)
+		console.log('Console log on retrieval of USER data in JSON' + user)
 		res.send(JSON.stringify(user))
 	})
 })
@@ -106,7 +106,7 @@ app.post(['/sessions', "/login"], function login(req, res) {
 			console.log("error in authentication");
 			res.redirect('/login');
 		} else {
-			console.log(user);
+			console.log('Show user details upon login' + user);
 			req.login(user);
 			res.redirect('/profile');
 		}
@@ -119,6 +119,7 @@ app.post(['/sessions', "/login"], function login(req, res) {
 
 app.get('/profile', function userShow(req, res) {
 	req.currentUser(function(err, user) {
+		console.log('Current User details once landed on Profile Page' + user);
 		var profilePath = path.join(views, "profile.html");
 		res.sendFile(profilePath);
 	});
@@ -128,28 +129,35 @@ app.get('/profile', function userShow(req, res) {
 // SUBMITTING NEW SCORES //
 
 app.get('/newscore', function (req, res) {
-	var newScore = path.join(views, "newscore.html");
-	res.sendFile(newScore);
-})
+	req.currentUser(function(err, user) {
+		var newScore = path.join(views, "newscore.html");
+		res.sendFile(newScore);
+		console.log('user data when moving to newScore submission page' + user);
+	});
+});
 
 app.post('/newscore', function (req, res) {
-	var submission = req.body;
-	var dateObj = new Date(submission.date);
-	submission.date = dateObj;
-	var scoreID = submission._id;
-	console.log('SCORE ID HERE: ' + scoreID);
-	//console.log(submission);
-	//console.log(typeof(submission.date));
-	// //user.gamesList.push(newscore)
-	db.Game.create(submission, function (err, newscore) {
-	    if (err) { return console.log(err); }
-	    else {
-	    	console.log(newscore + 'successfully input');
-	    	// PUSH TO ARRAY HERE???? //
-	    	res.redirect('/profile');
-	    }
+	req.currentUser(function(err, user) {
+		var submission = req.body;
+		var dateObj = new Date(submission.date);
+		submission.date = dateObj;
+		console.log(submission);
+		// //user.gamesList.push(newscore)
+		db.Game.create(submission, function (err, newscore) {
+		    if (err) { return console.log(err); }
+		    else {
+		    	//console.log(newscore + 'successfully added to Games Database');
+		    	console.log('console log user data on submission of new score' + user);
+		    	// PUSH TO ARRAY HERE???? //
+
+		    	//db.User.findOne({})
+
+		    	//$.post()
+		    	res.redirect('/profile');
+		    }
+		});
 	});
-})
+});
 
 
 // LOGOUT //
