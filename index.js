@@ -61,8 +61,14 @@ app.post(['/users', "/signup"], function signup(req, res) {
   var surname = user.surname;
   var email = user.email;
   var password = user.password;
-  db.User.createSecure(firstname, surname, email, password, function() {
-    res.send(email + " is registered!\n");
+  db.User.createSecure(firstname, surname, email, password, function (err, user) {
+    if (err) {
+    	console.log("error " + err);
+    } else {
+    	console.log('Sign up success');
+    	req.login(user);
+    	res.redirect('/profile');
+    }
   });
 });
 
