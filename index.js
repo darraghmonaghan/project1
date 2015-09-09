@@ -154,7 +154,8 @@ app.post('/newscore', function (req, res) {
 		    			console.log('User successfully found in User model' + foundUser);
 		    			db.User.update(
 		    				{_id: user._id},
-		    				{ $push: {gamesList: submission }})
+		    				{ $push: {gamesList: 89 }});
+		    			console.log("Game successfully pushed to array");
 		    		}
 		    	})
 		    	//$.post()
