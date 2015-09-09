@@ -1,22 +1,7 @@
-function getUserData() { 
-   var user;
-   $.get('/api/user', function(data) {
-      console.log(data);
-      user = data;
-        welcomeUser(user);
-        scoreTemplating(user);
-  })
-}
-
-function welcomeUser(user) {
-  console.log(user + '1')
-  var firstname = user.firstname;
-  $('#welcomeUser').text(firstname);
-}
 
 function scoreTemplating(user) {
       console.log(user + '2')
-      var scoresTemplate = _.template($('#scores-template').html());
+      var scoresTemplate = _.template($('#scores-template').html());      // Data origin / source will need updated //
       var games = user.games;
       games.forEach(function(game) { 
           var gameHtml = scoresTemplate(game);
@@ -29,12 +14,10 @@ function scoreTemplating(user) {
 
 
 $(function() {
-    
-  getUserData()
 
   $.get('/user.json', function (data) {
     var user = JSON.parse(data);
-    $('#welcomeUser').html(user.firstname);
+    $('#welcomeUser').html(user.firstname);       // Get request and then JQuery to welcome user by firstname //
   })
 
 });
