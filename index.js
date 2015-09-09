@@ -136,8 +136,10 @@ app.post('/newscore', function (req, res) {
 	var submission = req.body;
 	var dateObj = new Date(submission.date);
 	submission.date = dateObj;
-	console.log(submission);
-	console.log(typeof(submission.date));
+	var scoreID = submission._id;
+	console.log('SCORE ID HERE: ' + scoreID);
+	//console.log(submission);
+	//console.log(typeof(submission.date));
 	// //user.gamesList.push(newscore)
 	db.Game.create(submission, function (err, newscore) {
 	    if (err) { return console.log(err); }
