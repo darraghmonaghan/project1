@@ -9,18 +9,19 @@ var express = require("express"),
     session = require("express-session"),
 
 
-app.use(bodyParser.urlencoded({extended: true}));
 app.use("/static", express.static("public"));
 app.use("/vendor", express.static("bower_components"));
 
 
-// app.use(
-//   session({
-//     secret: 'super-secret-private-keyyy',
-//     resave: false,
-//     saveUninitialized: true
-//   })
-// );
+app.use(bodyParser.urlencoded({extended: true}));
+
+app.use(
+  session({
+    secret: 'super-secret-private-keyyy',
+    resave: false,
+    saveUninitialized: true
+  })
+);
 
 app.use(function (req, res, next) {
   // login a user
@@ -54,7 +55,7 @@ app.get('/signup', function (req, res) {
 });
 
 
-app.post("/signup", function signup(req, res) {
+app.post(['/users', "/signup"], function signup(req, res) {
   var user = req.body;
   var firstname = user.firstname;
   var surname = user.surname;
@@ -66,8 +67,6 @@ app.post("/signup", function signup(req, res) {
 });
 
 
-
-
 // HOME & LOGIN PAGE //
 
 app.get('/login', function (req, res) {
@@ -76,29 +75,31 @@ app.get('/login', function (req, res) {
 })
 
 
-app.post("/login", function login(req, res) {
+app.post(['/sessions', "/login"], function login(req, res) {
 	var user = req.body;
 	var username = user.email;
 	var password = user.password;
 	db.User.authenticate(username, password, function (err, user) {
-		res.redirect('/profile');
+		if (err) {
+			console.log("error in authentication");
+			res.redirect('/login');
+		} else {
+			req.login(user);
+			res.redirect('/profile');
+		}
 	});
 });
 
 
 
-
-
-
-
-
 // PROFILE PAGE //
 
-app.get('/profile', function (req, res) {
-	var user = user;
-	var profilePath = path.join(views, "profile.html");
-	res.sendFile(profilePath);
-})
+app.get('/profile', function userShow(req, res) {
+	req.currentUser(function(err, user) {
+		var profilePath = path.join(views, "profile.html");
+		res.sendFile(profilePath);
+	});
+});
 
 
 // SUBMITTING NEW SCORES //
