@@ -152,6 +152,9 @@ app.post('/newscore', function (req, res) {
 		    			console.log('error experienced in finding user in DB' + err);
 		    		} else {
 		    			console.log('User successfully found in User model' + foundUser);
+		    			db.User.update(
+		    				{_id: user._id},
+		    				{ $push: {gamesList: submission }})
 		    		}
 		    	})
 		    	//$.post()
