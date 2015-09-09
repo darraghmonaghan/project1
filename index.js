@@ -90,6 +90,7 @@ app.post(['/sessions', "/login"], function login(req, res) {
 			console.log("error in authentication");
 			res.redirect('/login');
 		} else {
+			console.log(user);
 			req.login(user);
 			res.redirect('/profile');
 		}
@@ -130,6 +131,14 @@ app.post('/newscore', function (req, res) {
 })
 
 
+// LOGOUT //
+
+app.get('/logout', function (req, res) {
+		req.logout()
+		res.redirect('/login');
+});
+
+		
 
 // USER DATA //
 

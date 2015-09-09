@@ -5,10 +5,10 @@ var bcrypt = require('bcrypt');
 
 
 var user = new Schema ({
-	firstname: String,
-	surname: String,
-	email: String,
-	passwordDigest: String,
+	firstname: {type: String, required: true},
+	surname: {type: String, required: true},
+	email: {type: String, required: true},
+	passwordDigest: {type: String, required: true},
 	gamesList: []
 });
 
@@ -34,6 +34,7 @@ user.statics.createSecure = function (firstname, surname, email, password, cb) {
     });
   });
 };
+
 
 
 // authenticate user (for login)
