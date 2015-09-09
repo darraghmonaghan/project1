@@ -73,13 +73,29 @@ app.post(['/users', "/signup"], function signup(req, res) {
 });
 
 
+app.get('/user.json', function (req,res) {
+	req.currentUser(function (err, user) {
+		console.log(user)
+		res.send(JSON.stringify(user))
+	})
+})
+
+app.get('user', function (req, res) {
+	req.currentUser(function (err, user) {
+		res.send(user);
+	})
+})
+
 // HOME & LOGIN PAGE //
+
+app.get('/', function (req, res) {			// Auto redirect to Login Page //
+	res.redirect('/login');
+})
 
 app.get('/login', function (req, res) {
 	var homePath = path.join(views, "login.html");
 	res.sendFile(homePath);
 })
-
 
 app.post(['/sessions', "/login"], function login(req, res) {
 	var user = req.body;
@@ -124,9 +140,12 @@ app.post('/newscore', function (req, res) {
 	console.log(typeof(submission.date));
 	// //user.gamesList.push(newscore)
 	db.Game.create(submission, function (err, newscore) {
-	    if (err) { return console.log(err); };
-	    console.log(newscore + 'successfully input');
-	    res.redirect('/profile');
+	    if (err) { return console.log(err); }
+	    else {
+	    	console.log(newscore + 'successfully input');
+	    	// PUSH TO ARRAY HERE???? //
+	    	res.redirect('/profile');
+	    }
 	});
 })
 
@@ -140,7 +159,7 @@ app.get('/logout', function (req, res) {
 
 		
 
-// USER DATA //
+// SANITY CHECK //
 
 app.listen(3000, function() {
     console.log("Server is now listening on localhost:3000");

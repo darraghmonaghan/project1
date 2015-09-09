@@ -32,6 +32,11 @@ $(function() {
     
   getUserData()
 
+  $.get('/user.json', function (data) {
+    var user = JSON.parse(data);
+    $('#welcomeUser').html(user.firstname);
+  })
+
 });
 
 
