@@ -139,6 +139,7 @@ app.get('/newscore', function (req, res) {
 app.post('/newscore', function (req, res) {
 	req.currentUser(function(err, user) {
 		var submission = req.body;
+		console.log(submission);
 		var dateObj = new Date(submission.date);
 		submission.date = dateObj;
 		//console.log(submission);
@@ -151,11 +152,15 @@ app.post('/newscore', function (req, res) {
 		    		if (err) {
 		    			console.log('error experienced in finding user in DB' + err);
 		    		} else {
-		    			console.log('User successfully found in User model' + foundUser);
+		    			// console.log('User successfully found in User model' + foundUser);
+		    			// update(userId, data, cb)
 		    			db.User.update(
-		    				{_id: user._id},
-		    				{ $push: {gamesList: 89 }});
-		    			console.log("Game successfully pushed to array");
+		    				{ _id : user._id },
+		    				{ $push : { gamesList : 101 }}, 
+		    				function(err, user) {
+		    					console.log("Game successfully pushed to array");
+		    					console.log("USER IS", user);
+		    				});
 		    		}
 		    	})
 		    	//$.post()
