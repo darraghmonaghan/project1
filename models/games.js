@@ -1,7 +1,5 @@
-
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
-
 
 var games = new Schema ({
 	date: Date,
@@ -26,7 +24,5 @@ var games = new Schema ({
 		 	hole18: Number} 
 });
 
-
 var Game = mongoose.model("Games", games);
-
 module.exports = Game;

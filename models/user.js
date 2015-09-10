@@ -3,13 +3,12 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt');
 
-
 var user = new Schema ({
 	firstname: {type: String, required: true},
 	surname: {type: String, required: true},
 	email: {type: String, required: true},
 	passwordDigest: {type: String, required: true},
-	gamesList: []
+	gamesList: {type: Array}
 });
 
 
@@ -64,8 +63,6 @@ user.methods.checkPassword = function (password) {
   // returns true or false
   return bcrypt.compareSync(password, this.passwordDigest);
 };
-
-
 
 var User = mongoose.model("User", user);
 

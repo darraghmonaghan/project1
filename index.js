@@ -137,37 +137,52 @@ app.get('/newscore', function (req, res) {
 });
 
 app.post('/newscore', function (req, res) {
-	req.currentUser(function(err, user) {
-		var submission = req.body;
-		console.log(submission);
-		var dateObj = new Date(submission.date);
-		submission.date = dateObj;
-		//console.log(submission);
-		// //user.gamesList.push(newscore)
-		db.Game.create(submission, function (err, newscore) {
-		    if (err) { return console.log(err); }
-		    else {
-		    	//console.log('console log user data on submission of new score' + user);
-		    	db.User.findOne({_id: user._id}, function (err, foundUser) {
-		    		if (err) {
-		    			console.log('error experienced in finding user in DB' + err);
-		    		} else {
-		    			// console.log('User successfully found in User model' + foundUser);
-		    			// update(userId, data, cb)
-		    			db.User.update(
-		    				{ _id : user._id },
-		    				{ $push : { gamesList : 101 }}, 
-		    				function(err, user) {
-		    					console.log("Game successfully pushed to array");
-		    					console.log("USER IS", user);
-		    				});
-		    		}
-		    	})
-		    	//$.post()
-		    	res.redirect('/profile');
-		    }
+	var submission = req.body;
+	db.Game.create(submission, function (err, newScore) {
+		if (err) {
+			console.log("There was an error.")
+		} 
+		console.log(newScore);
+		var gameId = newScore._id;
+		req.currentUser(function(err, user) {
+			var userId = user._id;
+			db.User.update({_id: userId},  
+           		{$push: {gamesList: gameId}}, function (err, user) {               
+           		console.log(user);         
+			})
 		});
-	});
+
+	})
+	
+	
+
+	// 	var submission = req.body;
+	// 	console.log(submission);
+	// 	var dateObj = new Date(submission.date);
+	// 	submission.date = dateObj;
+	// 	//console.log(submission);
+	// 	// //user.gamesList.push(newscore)
+	// 	// db.Game.create(submission, function (err, newscore) {
+	// 	//     if (err) { return console.log(err); }
+	// 	//     else {
+	// 	    	//console.log('console log user data on submission of new score' + user);
+	// 	    	db.User.findOne({_id: user._id}, function (err, foundUser) {
+	// 	    		console.log("FOUNDUSER", foundUser.gamesList);
+	// 	    		if (err) {
+	// 	    			console.log('error experienced in finding user in DB' + err);
+	// 	    		} else {
+	// 	    			console.log('User successfully found in User model' + foundUser);
+	// 	    			// update(userId, data, cb)
+	// 	    			foundUser.gamesList.push(submission);
+	// 	    			foundUser.save(function(err, user){
+	// 	    				console.log("error", err)
+	// 	    				console.log('user scorer' + user)
+	// 	    				res.redirect('/profile');
+	// 	    			})
+	// 	    		}
+	// 	    	});
+
+	// });
 });
 
 
