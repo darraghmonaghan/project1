@@ -223,7 +223,7 @@ app.get('/logout', function (req, res) {
 
 // SANITY CHECK //
 
-app.listen(3000, function() {
+app.listen(process.env.PORT || 3000, function() {
     console.log("Server is now listening on localhost:3000");
 });
 
