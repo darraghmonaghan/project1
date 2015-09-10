@@ -155,18 +155,32 @@ app.post('/newscore', function (req, res) {
 	})
 	
 app.get('/games', function (req, res) {
-	var gameId = req.body;
-	// pull game from database
-	db.User.find({user.gamesList : gameId}, function (err, gameData) {				// NO IDEA WHAT IS HAPPENING //
-		if (err) {
-			console.log('Error in finding gameID' + err);
-		} else {
-			console.log('gameID successfully found' + gameData);
-		}
-		// send back game data
-		res.send(gameData);
-	});
+	var gameIDs = req.body;
+	console.log(gameIDs);
+	var gamesArray = gameIDs.map(function (gameID) {
+		db.Game.findOne({_id: gameID }, function (err, game) {
+			if (err) {
+				console.log(err);
+			} else {
+				return game;
+			}
+		})
+		console.log('Array of full games info here:' + gamesArray);
+	})
 });
+
+
+	// // pull game from database
+	//db.User.find({user.gamesList : gameId}, function (err, gameData) {				// NO IDEA WHAT IS HAPPENING //
+	// 	if (err) {
+	// 		console.log('Error in finding gameID' + err);
+	// 	} else {
+	// 		console.log('gameID successfully found' + gameData);
+	// 	}
+	// 	// send back game data
+	// 	res.send(gameData);
+	// });
+
 
 	// 	var submission = req.body;
 	// 	console.log(submission);

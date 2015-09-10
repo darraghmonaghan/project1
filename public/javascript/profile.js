@@ -11,16 +11,27 @@ function getData() {
 function scoreTemplating(user) {
     $.get('/user.json', function (data) {      
       var user = JSON.parse(data);
-      var games = user.gamesList;
-      // loop through games
-      for (var i = 0; i < games.length; i++) {
-        //make a GET request to retrive all game data 
-        $.get('/games', function (data) {
-          // receive game data and send to templating
-          var scoresTemplate = _.template($('#scores-template').html()); 
-        })
-      }
-          
+      var gameIDs = user.gamesList;
+      console.log('games list here: ' + gameIDs);
+        $.ajax({
+            url: '/games',
+            type: 'GET',
+            data: gameIDs,
+            success: function() {
+              var scoresTemplate = _.template($('#scores-template').html()); 
+            }
+        });
+    });
+}
+
+
+      // for (var i = 0; i < games.length; i++) {
+      //   //make a GET request to retrive all game data 
+      //   $.get('/games', function (data) {
+      //     // receive game data and send to templating
+
+      
+         
 
  
 
@@ -32,8 +43,8 @@ function scoreTemplating(user) {
       //     var gameHtml = scoresTemplate(game);
       //     $("#scores-placeholder").append(gameHtml);
       // });   
-  });
-};
+//   });
+// };
 
 
 

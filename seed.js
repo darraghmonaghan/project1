@@ -21,7 +21,7 @@ var db = require('./models');
 // 	})
 // })
 
-db.Games.find({}, function(err, users){
+db.User.find({ email: 'bob@yahoo.com'}, function(err, users){
 	console.log(users)
 })
 
