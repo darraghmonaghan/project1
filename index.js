@@ -225,7 +225,6 @@ app.get('/currentUser', function (req, res) {
 		// 	console.log(game);
 		// });        
 	});
-
 });
 
 // LOGOUT //

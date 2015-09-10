@@ -28,12 +28,15 @@ function scoreTemplating() {
       console.log("RAW DATA: ", data);
       var gamesList = data;
       // run the template train on gamesList;
+      var scoresTemplate = _.template($('#scores-template').html());      // Data origin / source will need updated //
+          data.forEach(function(game) { 
+          var gameHtml = scoresTemplate(game);
+          $("#scores-placeholder").append(gameHtml);
+      });   
+  });
+};
 
-      // OOOORRRRRR
 
-      // do some array math here, then create smaller chunks
-   });
-}
       // console.log('games list here: ' + gameIDs);
       //   $.get('/games', Data, function(games){
       //     console.log(games);
@@ -55,14 +58,6 @@ function scoreTemplating() {
 
 
 
-      // console.log(games);
-      // var scoresTemplate = _.template($('#scores-template').html());      // Data origin / source will need updated //
-      //     games.forEach(function(game) { 
-      //     var gameHtml = scoresTemplate(game);
-      //     $("#scores-placeholder").append(gameHtml);
-      // });   
-//   });
-// };
 
 
 
