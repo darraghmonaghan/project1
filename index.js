@@ -75,7 +75,7 @@ app.post(['/users', "/signup"], function signup(req, res) {
 
 app.get('/user.json', function (req,res) {
 	req.currentUser(function (err, user) {
-		//console.log('Console log on retrieval of USER data in JSON' + user)
+		console.log('Console log on retrieval of USER data in JSON' + user)
 		res.send(JSON.stringify(user))
 	})
 })
@@ -142,19 +142,31 @@ app.post('/newscore', function (req, res) {
 		if (err) {
 			console.log("There was an error.")
 		} 
-		console.log(newScore);
+		//console.log(newScore);
 		var gameId = newScore._id;
 		req.currentUser(function(err, user) {
 			var userId = user._id;
 			db.User.update({_id: userId},  
            		{$push: {gamesList: gameId}}, function (err, user) {               
-           		console.log(user);         
+           		console.log(user);
+           		res.redirect('/profile');         
 			})
 		});
-
 	})
 	
-	
+app.get('/games', function (req, res) {
+	var gameId = req.body;
+	// pull game from database
+	db.User.find({user.gamesList : gameId}, function (err, gameData) {				// NO IDEA WHAT IS HAPPENING //
+		if (err) {
+			console.log('Error in finding gameID' + err);
+		} else {
+			console.log('gameID successfully found' + gameData);
+		}
+		// send back game data
+		res.send(gameData);
+	});
+});
 
 	// 	var submission = req.body;
 	// 	console.log(submission);
