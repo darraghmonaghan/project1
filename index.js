@@ -75,7 +75,7 @@ app.post(['/users', "/signup"], function signup(req, res) {
 
 app.get('/user.json', function (req,res) {
 	req.currentUser(function (err, user) {
-		console.log('Console log on retrieval of USER data in JSON' + user)
+		//console.log('Console log on retrieval of USER data in JSON' + user)
 		res.send(JSON.stringify(user))
 	})
 })
@@ -136,24 +136,68 @@ app.get('/newscore', function (req, res) {
 	});
 });
 
-app.post('/newscore', function (req, res) {
-	var submission = req.body;
-	db.Game.create(submission, function (err, newScore) {
-		if (err) {
-			console.log("There was an error.")
-		} 
-		//console.log(newScore);
-		var gameId = newScore._id;
-		req.currentUser(function(err, user) {
-			var userId = user._id;
-			db.User.update({_id: userId},  
-           		{$push: {gamesList: gameId}}, function (err, user) {               
-           		console.log(user);
-           		res.redirect('/profile');         
-			})
-		});
-	});
+app.post('/newscore', function(req, res) {
+            var submission = req.body;
+            /*  Get user via findOne & req.session.userId
+            	Get newScore object/data
+            	users.Gamelist.push(newScoreData)
+            */
+            db.User.findOne({
+                _id: req.session.userId
+            }, function(err, user) {
+
+                var newGame = new db.Game(submission);
+                console.log(newGame);
+                newGame.save(function(err, success) {
+                    if (err) {
+                        return console.log(err);
+                    }
+                    console.log("newGame saved successfully.")
+                });
+                //	console.log(seedGame._id);
+                user.gamesList.push(newGame._id);
+                //	console.log(user.gamesList);
+                user.save(function(err, success) {
+                    if (err) {
+                        return console.log(err);
+                    }
+                    console.log(user.firstname + "'s new game has been entered!");
+                });
+                res.redirect('./profile');
+            });
 });
+	// db.Game.create(submission, function (err, newScore) {
+	// 	if (err) {
+	// 		console.log("There was an error.")
+	// 	} 
+	// 	//console.log(newScore);
+	// 	var gameId = newScore._id;
+	// 	req.currentUser(function(err, user) {
+	// 		var userId = user._id;
+	// 		db.User.update({_id: userId},  
+ //           		{$push: {gamesList: gameId}}, function (err, user) {               
+ //           		console.log(user);
+ //           		res.redirect('/profile');         
+	// 		})
+	// 	});
+	// });
+
+
+
+ // Game.create(nin64, function(err, nintendo64){
+ //    if(err) {return console.log(err);}
+ //    Game.create(zelda, function(err, zeldaGame) {
+ //        if(err) {return console.log(err);}
+ //        zeldaGame.consoles.push(nintendo64);
+ //        zeldaGame.save();
+ //        console.log('Game success: \n' + zeldaGame);
+ //    });
+ // })
+
+
+
+
+
 	
 app.get('/games', function (req, res) {
 	var gameIDs = req.body;
@@ -166,7 +210,7 @@ app.get('/games', function (req, res) {
 				return game;
 			}
 		});
-		console.log('Array of full games info here:' + gamesArray);
+		//console.log('Array of full games info here:' + gamesArray);
 	});
 });
 

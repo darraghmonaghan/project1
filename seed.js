@@ -4,18 +4,18 @@ var db = require('./models');
 
 // db.User.remove({}, function(err, users){
 // 	console.log("Dropping Database")
-// 	db.User.createSecure("nathan", "allen", "fake@fake.co", "123", function(err, user){
+// 	db.User.createSecure("Bob", "Smith", "bob@yahoo.com", "123", function(err, user){
 // 		console.log("Created 1 user:")
 // 		console.log(user)
 
-// 		// ADD A GAME TO THE USER		
-// 		user.gamesList.push({date: Date.now(), course: "testing"})
-// 		user.save(function(err){
-// 			console.log(arguments)
-// 			process.exit();
-// 		})
-// 	})
-// })
+// // 		// ADD A GAME TO THE USER		
+// // 		user.gamesList.push({date: Date.now(), course: "testing"})
+// // 		user.save(function(err){
+// // 			console.log(arguments)
+// // 			process.exit();
+// // 		})
+// 	});
+// });
 
 // db.Game.find({ _id: '55f1db1db839997a3110f653'}, function(err, users){
 // 	console.log(users)
@@ -30,14 +30,57 @@ var db = require('./models');
 // 		// 	console.log(game);
 // 		// });        
 // });
+
+var seedGame = new db.Game({ course: 'test',
+  date: '2015-09-10',
+  score: 
+   { hole1: '11',
+     hole2: '',
+     hole3: '',
+     hole4: '',
+     hole5: '',
+     hole6: '',
+     hole7: '',
+     hole8: '',
+     hole9: '',
+     hole10: '',
+     hole11: '',
+     hole12: '',
+     hole13: '',
+     hole14: '',
+     hole15: '',
+     hole16: '',
+     hole17: '',
+     hole18: '' } 
+ });
+
+
+
+//var user = new db.User({firstname: 'jim'});
+
+
+// db.User.findOne({ _id: req.session.userId }, function(err, user) {
+
+// 	var newGame = new db.Game(req.body);
+// 	newGame.save(function(err, success) {
+// 		if (err) {return console.log(err); }
+// 	})
+// //	console.log(seedGame._id);
+// 	user.gamesList.push(newGame._id);
+// //	console.log(user.gamesList);
+// 	user.save(function(err, success) {
+// 		if (err) {return console.log(err); }
+// 		console.log(user.firstname + "'s new game has been entered!");
+// 	})
+// });
 	
 
 
 
 
-// db.Game.find({}, function (err, res) {
-// 	console.log(res);
-// });
+db.User.find({}, function (err, user) {
+	console.log(user);
+});
 
 // db.Games.remove({}, function (err, res) {
 // 	console.log(res);

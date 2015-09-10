@@ -5,3 +5,5 @@ mongoose.connect( process.env.MONGOLAB_URI ||
 			   	  "mongodb://localhost/golfscores");
 
 module.exports.User = require("./user");
+module.exports.Game = require("./game");
+
