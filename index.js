@@ -3,10 +3,10 @@ var express = require("express"),
 	app = express(),
     bodyParser = require("body-parser"),
     path = require("path"),
-    db = require("./models");
-    mongoose = require('mongoose');
-    views = path.join(__dirname, "views");
-    session = require("express-session"),
+    db = require("./models"),
+    mongoose = require('mongoose'),
+    views = path.join(__dirname, "views"),
+    session = require("express-session");
 
 
 app.use("/static", express.static("public"));
@@ -152,11 +152,12 @@ app.post('/newscore', function (req, res) {
            		res.redirect('/profile');         
 			})
 		});
-	})
+	});
+});
 	
 app.get('/games', function (req, res) {
 	var gameIDs = req.body;
-	console.log(gameIDs);
+	console.log('CL of gamesIDs' + gameIDs);
 	var gamesArray = gameIDs.map(function (gameID) {
 		db.Game.findOne({_id: gameID }, function (err, game) {
 			if (err) {
@@ -164,10 +165,12 @@ app.get('/games', function (req, res) {
 			} else {
 				return game;
 			}
-		})
+		});
 		console.log('Array of full games info here:' + gamesArray);
-	})
+	});
 });
+
+
 
 
 	// // pull game from database
@@ -209,8 +212,21 @@ app.get('/games', function (req, res) {
 	// 	    	});
 
 	// });
-});
 
+
+app.get('/currentUser', function (req, res) {
+
+	db.User.findOne({_id: req.session.userId })
+    .populate('gamesList')
+    .exec(function(err, game) {
+        if(err){return console.log(err);}
+		res.send(game.gamesList);
+		// game.gamesList.forEach(function(game) {
+		// 	console.log(game);
+		// });        
+	});
+
+});
 
 // LOGOUT //
 

@@ -1,10 +1,6 @@
 
 var db = require('./models');
 
-// db.User.createSecure("nathan", "allen", "fake@fake.co", "123", function(err, user){
-// 	console.log(err)
-// 	process.exit();
-// })
 
 // db.User.remove({}, function(err, users){
 // 	console.log("Dropping Database")
@@ -21,33 +17,22 @@ var db = require('./models');
 // 	})
 // })
 
-db.User.find({ email: 'bob@yahoo.com'}, function(err, users){
-	console.log(users)
-})
-
-// db.User.findOne({_id: "55f0ca6556c961b54712e36e"}, function(err, user){
-// 	user.gamesList.push({date: Date.now(), course: "testing"})
-// 	// console.log(user)
-// 	user.save(function(err){
-// 		console.log(arguments)
-// 		process.exit();
-// 	})
+// db.Game.find({ _id: '55f1db1db839997a3110f653'}, function(err, users){
+// 	console.log(users)
 // })
 
-
-// db.User.findOne({_id: "55f0bd0dda5c77cf38e82e9e"}, function(err, user){
-// 	user.gamesList.push({date: Date.now(), course: "testing"})
-// 	// console.log(user)
-// 	user.save(function(err){
-// 		console.log(arguments)
-// 		process.exit();
-// 	})
-// })
-
-
-// db.User.find({ email: 'bob@yahoo.com' }, function (err, res) {
-// 	console.log(res);
+// db.User.findOne({email: 'bob@yahoo.com' })
+//     .populate('gamesList')
+//     .exec(function(err, game) {
+//         if(err){return console.log(err);}
+// 		res.send(game.gamesList);
+// 		// game.gamesList.forEach(function(game) {
+// 		// 	console.log(game);
+// 		// });        
 // });
+	
+
+
 
 
 // db.Game.find({}, function (err, res) {

@@ -3,18 +3,43 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt');
 
-var user = new Schema ({
+var gamesSchema = new Schema ({
+  date: Date,
+  course: String, 
+  score: {hole1: Number,
+      hole2: Number,
+      hole3: Number,
+      hole4: Number,
+      hole5: Number,
+      hole6: Number,
+      hole7: Number,
+      hole8: Number,
+      hole9: Number,
+      hole10: Number,
+      hole11: Number,
+      hole12: Number,
+      hole13: Number,
+      hole14: Number,
+      hole15: Number,
+      hole16: Number,
+      hole17: Number,
+      hole18: Number} 
+});
+
+
+
+var userSchema = new Schema ({
 	firstname: {type: String, required: true},
 	surname: {type: String, required: true},
 	email: {type: String, required: true},
 	passwordDigest: {type: String, required: true},
-	gamesList: {type: Array}
+	gamesList: [{type: Schema.Types.ObjectId, ref: 'Game'}]
 });
 
 
 
 // create a new user with secure (hashed) password (for sign up)
-user.statics.createSecure = function (firstname, surname, email, password, cb) {
+userSchema.statics.createSecure = function (firstname, surname, email, password, cb) {
   // `_this` now references our schema
   var _this = this;
   // generate some salt
@@ -37,7 +62,7 @@ user.statics.createSecure = function (firstname, surname, email, password, cb) {
 
 
 // authenticate user (for login)
-user.statics.authenticate = function (email, password, cb) {
+userSchema.statics.authenticate = function (email, password, cb) {
   // find user by email entered at log in
   this.findOne({email: email}, function (err, user) {
     // throw error if can't find user
@@ -57,13 +82,14 @@ user.statics.authenticate = function (email, password, cb) {
 
 
 // compare password user enters with hashed password (`passwordDigest`)
-user.methods.checkPassword = function (password) {
+userSchema.methods.checkPassword = function (password) {
   // run hashing algorithm (with salt) on password to compare with stored `passwordDigest`
   // `compareSync` is like `compare` but synchronous
   // returns true or false
   return bcrypt.compareSync(password, this.passwordDigest);
 };
 
-var User = mongoose.model("User", user);
+var Game = mongoose.model("Game", gamesSchema);
+var User = mongoose.model("User", userSchema);
 
 module.exports = User;
