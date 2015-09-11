@@ -9,36 +9,32 @@
         <script src="/vendor/underscore/underscore-min.js"></script>
         <script src="/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="/vendor/bootstrap/dist/css/bootstrap.min.css">
-        <!-- <script src="/static/javascript/newscore.js"></script> -->
+        <link rel="stylesheet" type="text/css" href="/static/css/signup.css">
 
     </head>
     <body>
-    	<h1>Account Sign Up</h1>
-
+    	<!-- <h1>Account Sign Up</h1> -->
 	    <div class='container'>
-
-				<div class="container">
-
-					<table>
-						<tbody>
+			<div class="container">
+				<div class='row'>
+					<div class='row'>
+					<div class="col-md-3"></div>
+					<div id='signUpBox' class="col-md-6">
 							<form method='POST' action='/signup' id="signup">
-							<tr>	
-								<td><input type="text" name='firstname' class="form-control" placeholder="Please Enter Your Firstname" aria-describedby="sizing-addon2" required></td>
-							</tr>
-							<tr>	
-								<td><input type="text" name='surname' class="form-control" placeholder="Please Enter Your Surname" aria-describedby="sizing-addon2" required></td>
-							</tr>
-							<tr>	
-								<td><input type="text" name='email' class="form-control" placeholder="Please Enter Your E-Mail Address" aria-describedby="sizing-addon2" required></td>
-							</tr>
-							<tr>	
-								<td><input placeholder="Create a Password" class="textbox-n" type="password" id="date" name='password' required></td>
-							</tr>
-							<tr>	
-								<td><button class="btn btn-default">Complete Sign Up</button></td>
-							</tr>
+								<input type="text" name='firstname' class="form-control" placeholder="Please Enter Your Firstname" aria-describedby="sizing-addon2" required>
+								<br>
+								<input type="text" name='surname' class="form-control" placeholder="Please Enter Your Surname" aria-describedby="sizing-addon2" required>
+								<br>
+								<input type="text" name='email' class="form-control" placeholder="Please Enter Your E-Mail Address" aria-describedby="sizing-addon2" required>
+								<br>
+								<input placeholder="Create a Password" class="textbox-n form-control" type="password" id="date" name='password' required>
+								<br>
+								<button class="btn btn-default form-control">Complete Sign Up</button>
 							</form>
+					</div>
+					<div class="col-md-3"></div>
 				</div>
+			</div>
 		</div>
     </body>
 </html>
