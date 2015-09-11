@@ -8,27 +8,27 @@ function getData() {
   });
 }
 
-function deleteScore(context) {
+function deleteScore(context) {               // Function is called from the ONCLICK attribute in HTML page //
   //console.log(context);
-  var deleteID = $(context).data('id');
+  var deleteID = $(context).data('id');       // Extracting value from Data-ID attribute, taken from INPUT in PROFILE.HTML //
   console.log(deleteID);
-  $.ajax({
-    url: '/games',
+  $.ajax({                                  
+    url: '/games',                            // AJAX request to DELETE route //
     type: 'DELETE',
-    headers: {'ID': deleteID},
+    headers: {'ID': deleteID},                // variable deleteID placed into the header being sent //
     success: function(res) {
-      scoreTemplating()
+      scoreTemplating()                       // this function is not working yet / or res.redirect on route //
     }
   });
 }
 
 
 function scoreTemplating() {
-   $.get('/currentUser', function(data) {
+   $.get('/currentUser', function(data) {                                 // AJAX request to get current User data //
       console.log("Raw data from templating function: ", data);
       var gamesList = data;
-      // run the template train on gamesList;
-      var scoresTemplate = _.template($('#scores-template').html());      // Data origin / source will need updated //
+      
+      var scoresTemplate = _.template($('#scores-template').html());      // User data run through templating function //
           data.forEach(function(game) { 
           var gameHtml = scoresTemplate(game);
           $("#scores-placeholder").append(gameHtml);

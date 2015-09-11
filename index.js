@@ -24,12 +24,10 @@ app.use(
 );
 
 app.use(function (req, res, next) {
-  // login a user
-  req.login = function (user) {
+  req.login = function (user) {               // login a user //
     req.session.userId = user._id;
   };
-  // find the current user
-  req.currentUser = function (cb) {
+  req.currentUser = function (cb) {           // find the current user //
     db.User.
       findOne({ _id: req.session.userId },
       function (err, user) {
@@ -37,13 +35,11 @@ app.use(function (req, res, next) {
         cb(null, user);
       })
   };
-  // logout the current user
-  req.logout = function () {
+  req.logout = function () {                  // logout the current user //
     req.session.userId = null;
     req.user = null;
   }
-  // call the next middleware in the stack
-  next(); 
+  next();                                     // call the next middleware in the stack
 });
 
 
@@ -57,11 +53,11 @@ app.get('/signup', function (req, res) {
 
 app.post(['/users', "/signup"], function signup(req, res) {
   var user = req.body;
-  var firstname = user.firstname;
+  var firstname = user.firstname;                           // Extract all required Signup information //
   var surname = user.surname;
   var email = user.email;
   var password = user.password;
-  db.User.createSecure(firstname, surname, email, password, function (err, user) {
+  db.User.createSecure(firstname, surname, email, password, function (err, user) {      // Feed extracted signup data into function //
     if (err) {
     	console.log("error " + err);
     } else {
@@ -75,7 +71,6 @@ app.post(['/users', "/signup"], function signup(req, res) {
 
 app.get('/user.json', function (req,res) {
 	req.currentUser(function (err, user) {
-		//console.log('Console log on retrieval of USER data in JSON' + user)
 		res.send(JSON.stringify(user))
 	})
 })
@@ -99,14 +94,13 @@ app.get('/login', function (req, res) {
 
 app.post(['/sessions', "/login"], function login(req, res) {
 	var user = req.body;
-	var username = user.email;
-	var password = user.password;
+	var username = user.email;                 // Extracting username and password data //  
+	var password = user.password;              
 	db.User.authenticate(username, password, function (err, user) {
 		if (err) {
 			console.log("error in authentication");
-			res.redirect('/login');
-		} else {
-			//console.log('Show user details upon login' + user);
+			res.redirect('/login');                // redirect to LOGIN page if authentication fails // 
+		} else {                                
 			req.login(user);
 			res.redirect('/profile');
 		}
@@ -138,16 +132,13 @@ app.get('/newscore', function (req, res) {
 
 app.post('/newscore', function(req, res) {
             var submission = req.body;
-            /*  Get user via findOne & req.session.userId
-            	Get newScore object/data
-            	users.Gamelist.push(newScoreData)
-            */
-            db.User.findOne({
+
+            db.User.findOne({                 // querying DB to find the current user via the Session ID //
                 _id: req.session.userId
             }, function(err, user) {
 
                 var newGame = new db.Game(submission);
-                console.log(newGame);
+                // console.log(newGame);
                 newGame.save(function(err, success) {
                     if (err) {
                         return console.log(err);
@@ -170,11 +161,11 @@ app.post('/newscore', function(req, res) {
 
 
 app.delete("/games", function (req, res) {
-  	//console.log(typeof(req.headers.id));
-  	var deleteID = req.headers.id;
-  	db.Game.find( {_id : deleteID }, function (err, game) {
+  	//console.log(req.headers.id);             // testing to see the reciept of game ID in header, sent over vai AJAX request on Delete function //         
+  	var deleteID = req.headers.id;             // set game ID to a variable for use //
+  	db.Game.find( {_id : deleteID }, function (err, game) {      // Stage 1. Querying the DB to find the relevant game using GameID //
   		console.log('Game Found' + game);
-  	}).remove(function (err, deleted) {
+  	}).remove(function (err, deleted) {                          // Stage 2. Chaining the remove() on to stage.1 in order to DELETE the GameID // 
   		console.log('Successfully deleted' + deleted);
   	});
 });
@@ -198,25 +189,22 @@ app.get('/games', function (req, res) {
 
 app.get('/currentUser', function (req, res) {
 
-	db.User.findOne({_id: req.session.userId })
-    .populate('gamesList')
+	db.User.findOne({_id: req.session.userId })        // Find current user through querying DB using SessionID //
+    .populate('gamesList')                           // Populate() converts the gameID's stored in the gamesList array into an array of game OBJECTS, with all relevant game data stored within each game object //
     .exec(function(err, game) {
         if(err){return console.log(err);}
-        if(game.gamesList.length !== 0){
-			res.send(game.gamesList);
-        } else {
+        if(game.gamesList.length !== 0){             // Stage 1. If gamesList contains any gameID's, then send the gamesList on query //
+			   res.send(game.gamesList);                   
+        } else {                                     // Stage 2. If gamesList is empty, then  do not send the gamesList Array, THIS STOPS NODEMON CRASHING //
         	res.sendStatus(404)
-        }
-		// game.gamesList.forEach(function(game) {
-		// 	console.log(game);
-		// });        
+        }       
 	});
 });
 
 // LOGOUT //
 
 app.get('/logout', function (req, res) {
-		req.logout()
+		req.logout()                                      // Execute logout() and redirect to Login / Homepage //
 		res.redirect('/login');
 });
 

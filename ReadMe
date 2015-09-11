@@ -1,0 +1,60 @@
+
+Project Number:		1
+Name of Student:	Darragh Monaghan
+Contact Info:		monaghan.darragh@gmail.com
+GA Cohort:			San Francisco, WDI 21
+Name of Project: 	Golf Scorecard Database App
+Date of Creation:	September, 2015
+
+_____________________________________________________________________________________________________
+
+
+An Introduction to the Application:
+
+The app will help digitize the recording and tracking of golf scores, allowing users to easily refer back to previous game data.
+
+
+
+User Stories - A User Should Be Able To:
+
+- Signup for an account
+- Sign in to their account
+- View a personalized profile page, showing all previous games played
+- Submit a new score, which is subsequently posted to the profile page data
+- Logout of their account
+
+
+
+Technologies Used within Application:
+
+- Languages: Javascript, HTML, CSS
+- Database: MongoDB
+- Middleware: Numerous, please refer to bower.json and package.json
+
+
+
+Database Model:
+
+- Format: REFERENCED
+- The database consisted of 2 models - User and Game
+- Game documents had their Game ID REFERENCED in an array within the User model
+- On retrieval of a Users document, the populate() function is run in order to retrieve / populate the actual Game Data 
+
+
+
+Potential Future Functionality:
+
+- High level overview of user game info within profile page, e.g.: 
+		a. Best / Lowest Score
+		b. Number of Games Played
+		c. Number of Holes in One
+		d. Number of Courses Played
+- Search all submitted scores by golf course name, showing more detailed course and gameList information
+- Social media applications, emailing friends / posting scores to social media
+- Record scores for multiple players
+- Integating with API's
+		a. Integrate with Google Maps API to show geographic distribution of games played
+		b. Integrate with DocuSign API
+		c. Search for Golf Course Data API
+
+
