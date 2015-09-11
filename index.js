@@ -194,6 +194,22 @@ app.post('/newscore', function(req, res) {
  //    });
  // })
 
+app.delete("/games", function (req, res){
+  	console.log(req.headers.id);
+});
+
+
+  // set the value of the id
+  // var targetId = parseInt(req.params.id, 10);
+  // console.log(targetId);
+  // // find item in the array matching the id
+  // var targetItem = _.findWhere(gamesList, {id: targetId});
+  // // get the index of the found item
+  // var index = gamesList.indexOf(targetItem);
+  // // remove the item at that index, only remove 1 item
+  // gamesList.splice(index, 1);
+  // // render deleted object
+  // res.send(JSON.stringify(targetItem));
 
 
 

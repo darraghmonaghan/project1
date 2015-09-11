@@ -51,6 +51,7 @@
 								    <td>Front 9</td>
 								    <td>Back 9</td>
 								    <td>Total</td>
+								    <td>Delete</td>
 								</tr>
 							</thead>
 							<tbody id='scores-placeholder'></tbody>
@@ -70,6 +71,7 @@
   				<td> <%= score.hole1 %> </td>
   				<td> <%= score.hole2 %> </td>
   				<td> <%= score.hole3 %> </td>
+  				<td> <div class="btn-group btn-group-xs close" role="group" aria-label="..." onclick='deleteScore(this)' data-id=<%= _id %> >X</div> </td>
  			</tr>
   </script>
 

@@ -6,8 +6,44 @@ function getData() {
     var user = JSON.parse(data);
     console.log('Data received through AJAX in JSON format' , user);
     $('#welcomeUser').html(user.firstname);    // Get request and then JQuery to welcome user by firstname //
-  })
+  });
 }
+
+function deleteScore(context) {
+  //console.log(context);
+  var deleteID = $(context).data('id');
+  console.log(deleteID);
+  $.ajax({
+    url: '/games',
+    type: 'DELETE',
+    headers: {'ID': deleteID},
+    //success: function(res) {
+  });
+}
+
+
+  // var gameId = 
+  // console.log('Game ID on Delete Request shown here: ' + gameId)
+  // $.ajax({
+  //   url: '/games/' + gameId,
+  //   type: 'DELETE',
+  //   success: function(res) {
+  //     // once successfull, re-render all foods
+  //     scoreTemplating();
+
+
+// function deleteFood(context) {
+//   var foodId = $(context).data().id;
+//   $.ajax({
+//     url: '/foods/' + foodId,
+//     type: 'DELETE',
+//     success: function(res) {
+//       // once successfull, re-render all foods
+//       getFoods();
+//     }
+//   });
+// }
+
 
 
 // function scoreTemplating(user) {
@@ -25,7 +61,7 @@ function getData() {
 
 function scoreTemplating() {
    $.get('/currentUser', function(data) {
-      console.log("RAW DATA: ", data);
+      console.log("Raw data from templating function: ", data);
       var gamesList = data;
       // run the template train on gamesList;
       var scoresTemplate = _.template($('#scores-template').html());      // Data origin / source will need updated //
@@ -36,29 +72,7 @@ function scoreTemplating() {
   });
 };
 
-
-      // console.log('games list here: ' + gameIDs);
-      //   $.get('/games', Data, function(games){
-      //     console.log(games);
-      //   });
-
-
-
-
-
-      // for (var i = 0; i < games.length; i++) {
-      //   //make a GET request to retrive all game data 
-      //   $.get('/games', function (data) {
-      //     // receive game data and send to templating
-
-      
          
-
- 
-
-
-
-
 
 
 // ON PAGE READY, EXECUTE //
