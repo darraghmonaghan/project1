@@ -166,36 +166,18 @@ app.post('/newscore', function(req, res) {
                 res.redirect('./profile');
             });
 });
-	// db.Game.create(submission, function (err, newScore) {
-	// 	if (err) {
-	// 		console.log("There was an error.")
-	// 	} 
-	// 	//console.log(newScore);
-	// 	var gameId = newScore._id;
-	// 	req.currentUser(function(err, user) {
-	// 		var userId = user._id;
-	// 		db.User.update({_id: userId},  
- //           		{$push: {gamesList: gameId}}, function (err, user) {               
- //           		console.log(user);
- //           		res.redirect('/profile');         
-	// 		})
-	// 	});
-	// });
 
 
 
- // Game.create(nin64, function(err, nintendo64){
- //    if(err) {return console.log(err);}
- //    Game.create(zelda, function(err, zeldaGame) {
- //        if(err) {return console.log(err);}
- //        zeldaGame.consoles.push(nintendo64);
- //        zeldaGame.save();
- //        console.log('Game success: \n' + zeldaGame);
- //    });
- // })
 
-app.delete("/games", function (req, res){
-  	console.log(req.headers.id);
+app.delete("/games", function (req, res) {
+  	//console.log(typeof(req.headers.id));
+  	var deleteID = req.headers.id;
+  	db.Game.find( {_id : deleteID }, function (err, game) {
+  		console.log('Game Found' + game);
+  	}).remove(function (err, deleted) {
+  		console.log('Successfully deleted' + deleted);
+  	});
 });
 
 
