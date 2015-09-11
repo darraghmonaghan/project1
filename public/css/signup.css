@@ -1,4 +1,9 @@
 
+body {
+	background-image: url('http://images.fasocdn.com/3015/814595xl.jpg?v=201507191515&cv=201507191515');
+	background-size: cover;
+}
+
 #signUpBox {
 	background-color: rgba(255, 255, 255, 0.6);
 	padding: 2%;
@@ -14,6 +19,6 @@
 
 
 .btn {
-	background-color: rgba(25, 25, 25, 0.9);
+	background-color: rgba(212, 174, 37, 0.9);
 	font: white;
 }
