@@ -10,31 +10,28 @@
         <script src="/vendor/underscore/underscore-min.js"></script>
         <script src="/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="/vendor/bootstrap/dist/css/bootstrap.min.css">
-        <!-- <script src="/static/javascript/newscore.js"></script> -->
+        <link rel="stylesheet" type="text/css" href="/static/css/login.css">
 
     </head>
     <body>
-	    <div class='container-fluid'>
-
-				<div class="container-fluid">
-
-					<table>
-						<tbody>
-							<form method='POST' action='/login' id="login">
-							<tr>	
-								<td><input type="text" name='email' class="form-control" placeholder="Your E-Mail Address" aria-describedby="sizing-addon2" required></td>
-							</tr>
-							<tr>	
-								<td><input type="password" name='password' class="form-control" placeholder="Password" aria-describedby="sizing-addon2" required></td>
-							</tr>
-							<tr>	
-								<td><button class="btn btn-default">Login</button></td>
-							</tr>
-							</form>
-							<tr>	
-								<td><a href='/signup'>Sign up for an account</a></td>
-							</tr>
+	    <div class='container-fluid' id='background'>
+			<div class="container-fluid">
+				<div class='row'>
+					<div class="col-md-4"></div>
+					<div id='loginBox' class="col-md-4">
+						<form method='POST' action='/login' id="login">
+							<input type="text" name='email' class="form-control" placeholder="Your E-Mail Address" aria-describedby="sizing-addon2" required>
+							<br>
+							<input type="password" name='password' class="form-control" placeholder="Password" aria-describedby="sizing-addon2" required>
+							<br>
+							<button class="form-control">Lets Play Golf!</button>
+							<br>
+						</form>
+							<div id='signUp'><a href='/signup'>Sign Up For An Account</a></div>
+					</div>
+					<div class="col-md-4"></div>
 				</div>
+			</div>
 		</div>
     </body>
 </html>

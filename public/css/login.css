@@ -1,0 +1,26 @@
+
+body {
+	background-image: url('http://images.fasocdn.com/3015/814595xl.jpg?v=201507191515&cv=201507191515');
+	background-size: cover;
+}
+
+#loginBox {
+	background-color: rgba(255, 255, 255, 0.6);
+	padding: 2%;
+	position: relative;
+	top: 25%;
+	margin: 150px 0px 0px 0px;
+}
+
+#loginBox input {
+	text-align: center;
+}
+
+button {
+	background-color: rgb(111, 5, 23) ;
+}
+
+#signUp {
+	text-align: center;
+	font-color: rgb(240, 93, 14);
+}

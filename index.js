@@ -169,7 +169,6 @@ app.post('/newscore', function(req, res) {
 
 
 
-
 app.delete("/games", function (req, res) {
   	//console.log(typeof(req.headers.id));
   	var deleteID = req.headers.id;
@@ -179,22 +178,6 @@ app.delete("/games", function (req, res) {
   		console.log('Successfully deleted' + deleted);
   	});
 });
-
-
-  // set the value of the id
-  // var targetId = parseInt(req.params.id, 10);
-  // console.log(targetId);
-  // // find item in the array matching the id
-  // var targetItem = _.findWhere(gamesList, {id: targetId});
-  // // get the index of the found item
-  // var index = gamesList.indexOf(targetItem);
-  // // remove the item at that index, only remove 1 item
-  // gamesList.splice(index, 1);
-  // // render deleted object
-  // res.send(JSON.stringify(targetItem));
-
-
-
 
 	
 app.get('/games', function (req, res) {
@@ -213,56 +196,17 @@ app.get('/games', function (req, res) {
 });
 
 
-
-
-	// // pull game from database
-	//db.User.find({user.gamesList : gameId}, function (err, gameData) {				// NO IDEA WHAT IS HAPPENING //
-	// 	if (err) {
-	// 		console.log('Error in finding gameID' + err);
-	// 	} else {
-	// 		console.log('gameID successfully found' + gameData);
-	// 	}
-	// 	// send back game data
-	// 	res.send(gameData);
-	// });
-
-
-	// 	var submission = req.body;
-	// 	console.log(submission);
-	// 	var dateObj = new Date(submission.date);
-	// 	submission.date = dateObj;
-	// 	//console.log(submission);
-	// 	// //user.gamesList.push(newscore)
-	// 	// db.Game.create(submission, function (err, newscore) {
-	// 	//     if (err) { return console.log(err); }
-	// 	//     else {
-	// 	    	//console.log('console log user data on submission of new score' + user);
-	// 	    	db.User.findOne({_id: user._id}, function (err, foundUser) {
-	// 	    		console.log("FOUNDUSER", foundUser.gamesList);
-	// 	    		if (err) {
-	// 	    			console.log('error experienced in finding user in DB' + err);
-	// 	    		} else {
-	// 	    			console.log('User successfully found in User model' + foundUser);
-	// 	    			// update(userId, data, cb)
-	// 	    			foundUser.gamesList.push(submission);
-	// 	    			foundUser.save(function(err, user){
-	// 	    				console.log("error", err)
-	// 	    				console.log('user scorer' + user)
-	// 	    				res.redirect('/profile');
-	// 	    			})
-	// 	    		}
-	// 	    	});
-
-	// });
-
-
 app.get('/currentUser', function (req, res) {
 
 	db.User.findOne({_id: req.session.userId })
     .populate('gamesList')
     .exec(function(err, game) {
         if(err){return console.log(err);}
-		res.send(game.gamesList);
+        if(game.gamesList.length !== 0){
+			res.send(game.gamesList);
+        } else {
+        	res.sendStatus(404)
+        }
 		// game.gamesList.forEach(function(game) {
 		// 	console.log(game);
 		// });        

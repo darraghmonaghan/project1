@@ -1,6 +1,5 @@
 
 
-
 function getData() {
   $.get('/user.json', function (data) {
     var user = JSON.parse(data);
@@ -17,47 +16,12 @@ function deleteScore(context) {
     url: '/games',
     type: 'DELETE',
     headers: {'ID': deleteID},
-    //success: function(res) {
+    success: function(res) {
+      scoreTemplating()
+    }
   });
 }
 
-
-  // var gameId = 
-  // console.log('Game ID on Delete Request shown here: ' + gameId)
-  // $.ajax({
-  //   url: '/games/' + gameId,
-  //   type: 'DELETE',
-  //   success: function(res) {
-  //     // once successfull, re-render all foods
-  //     scoreTemplating();
-
-
-// function deleteFood(context) {
-//   var foodId = $(context).data().id;
-//   $.ajax({
-//     url: '/foods/' + foodId,
-//     type: 'DELETE',
-//     success: function(res) {
-//       // once successfull, re-render all foods
-//       getFoods();
-//     }
-//   });
-// }
-
-
-
-// function scoreTemplating(user) {
-//     $.get('/user.json', function (data) {      
-//       var user = JSON.parse(data);
-//       var Data = {};
-//       var gameIDs = user.gamesList;
-//       data.gameIds = gameIDs;
-//       console.log('games list here: ' + gameIDs);
-//         $.get('/games', Data, function(games){
-//           console.log(games);
-//         });
-//     });
-// }
 
 function scoreTemplating() {
    $.get('/currentUser', function(data) {
@@ -72,8 +36,6 @@ function scoreTemplating() {
   });
 };
 
-         
-
 
 // ON PAGE READY, EXECUTE //
 
@@ -82,7 +44,6 @@ $(function() {
 
   getData();
   scoreTemplating();
-
 
 });
 
