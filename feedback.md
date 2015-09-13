@@ -14,6 +14,7 @@
 
 ##Next Steps
 
+* Add a `.md` to your readme (which looks great). You can look up more on how to format markdown if you'd like to add to the readme's styling.
 * Consider using a date picker input for date fields
 * Consider adding model validations to the user for a signup (ex password must be > 6 characters, username is unique, etc)
 * Consider adding client-side form validations to signup fields

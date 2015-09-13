@@ -1,4 +1,4 @@
-
+// it: nice seperation of function definition prior to page load and function execution on page load
 
 // ON PAGE READY, EXECUTE //
 

@@ -1,3 +1,8 @@
+/*
+	it: avoid creating stylesheets named after the page being styled,
+	i.e. `login.css`. Rather create style sheets around the assets
+	being styled, i.e. `forms.css` & `buttons.css`
+*/
 
 body {
 	background-image: url('http://images.fasocdn.com/3015/814595xl.jpg?v=201507191515&cv=201507191515');

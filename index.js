@@ -15,6 +15,9 @@ app.use("/vendor", express.static("bower_components"));
 
 app.use(bodyParser.urlencoded({extended: true}));
 
+// it: consider using a key generator instead of hardcoding the secret key (which is now exposed on github) 
+// this one would work, https://github.com/mrcrgl/node-keygen.
+
 app.use(
   session({
     secret: 'super-secret-private-keyyy',
@@ -131,6 +134,7 @@ app.get('/newscore', function (req, res) {
 });
 
 app.post('/newscore', function(req, res) {
+  // it: too much indentations!
             var submission = req.body;
 
             db.User.findOne({                 // querying DB to find the current user via the Session ID //
@@ -145,6 +149,7 @@ app.post('/newscore', function(req, res) {
                     }
                     console.log("newGame saved successfully.")
                 });
+                // it: nice use of associations
                 //	console.log(seedGame._id);
                 user.gamesList.push(newGame._id);
                 //	console.log(user.gamesList);
