@@ -1,4 +1,4 @@
-
+// it: great modular functions!
 
 function getData() {
   $.get('/user.json', function (data) {

@@ -1,3 +1,4 @@
+// it: consider wiping the db, adding a user to the seed file, and finally adding a game(s) to them once created.
 
 var db = require('./models');
 
